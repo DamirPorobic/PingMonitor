@@ -109,7 +109,6 @@
             this.primaryTarget_txt.Name = "primaryTarget_txt";
             this.primaryTarget_txt.Size = new System.Drawing.Size(203, 20);
             this.primaryTarget_txt.TabIndex = 3;
-            this.primaryTarget_txt.TextChanged += new System.EventHandler(this.primaryTarget_txt_TextChanged);
             // 
             // primaryTarget_lbl
             // 

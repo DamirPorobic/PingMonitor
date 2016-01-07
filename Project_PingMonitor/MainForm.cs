@@ -15,12 +15,13 @@ namespace Project_PingMonitor
     public partial class MainForm : Form
     {
         enum PingStatus { none, good, poor, bad};
-        Timer primaryTimer = new Timer();
-        Timer secondaryTimer = new Timer();
+        Timer pingTimer = new Timer();
         IPAddress primaryTargetIP = null;
         IPAddress secondaryTargetIP = null;
         bool primaryPingRunning = false;
         bool secondaryPringRunning = false;
+        Ping pingPrimaryTarget = new Ping();
+        PingReply replyPrimaryTarget;
 
         public MainForm()
         {
@@ -31,19 +32,22 @@ namespace Project_PingMonitor
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            primaryTimer.Tick += new EventHandler(primaryTick);
-            primaryTimer.Interval = 1000;
-                     
+            pingTimer.Tick += new EventHandler(primaryTick);
+            pingTimer.Interval = 1000;
+            pingTimer.Start();
+
+            primaryTarget_txt.Text = Properties.Settings.Default.primaryTarget;
+
+            if(Properties.Settings.Default.primaryTargetEnabled)
+                primaryTargetToggle();
+
+
         }
 
         private void primaryTick(Object myObject, EventArgs myEventArgs)
         {       
-            if (primaryTargetIP != null)
+            if (primaryPingRunning == true)
             {
-                Ping pingPrimaryTarget = new Ping();
-                PingReply replyPrimaryTarget;
-                primaryReply_txt.Text = "";
-
                 try
                 {
                     replyPrimaryTarget = pingPrimaryTarget.Send(primaryTargetIP);             
@@ -51,9 +55,9 @@ namespace Project_PingMonitor
                     {
                         setReplyOutput(ref primaryReply_txt, replyPrimaryTarget);
 
-                        if(replyPrimaryTarget.RoundtripTime < 100)
+                        if(replyPrimaryTarget.RoundtripTime < Properties.Settings.Default.thresholdLow)
                             setNotification(PingStatus.good);
-                        else if(replyPrimaryTarget.RoundtripTime < 300)
+                        else if(replyPrimaryTarget.RoundtripTime < Properties.Settings.Default.thresholdHigh)
                             setNotification(PingStatus.poor);
                         else
                             setNotification(PingStatus.bad);
@@ -79,24 +83,37 @@ namespace Project_PingMonitor
 
         private void primaryTargetToggle_btn_Click(object sender, EventArgs e)
         {
-            if(primaryPingRunning == true)
+            primaryTargetToggle();
+        }
+
+
+        private void primaryTargetToggle()
+        {
+            if (primaryPingRunning == true)
             {
-                primaryTimer.Stop();
                 primaryStatus_txt.Text = "Stopped";
                 primaryTargetToggle_btn.Text = "Start";
                 primaryPingRunning = false;
+                primaryTarget_txt.Enabled = true;
                 primaryReply_txt.Text = "";
                 setNotification(PingStatus.none);
+
+                Properties.Settings.Default.primaryTargetEnabled = false;
+                Properties.Settings.Default.Save();
             }
             else
             {
                 resolveHostname(ref primaryTargetIP, primaryTarget_txt.Text);
                 if (primaryTargetIP != null)
                 {
-                    primaryTimer.Start();
                     primaryStatus_txt.Text = "Running";
                     primaryTargetToggle_btn.Text = "Stop";
+                    primaryTarget_txt.Enabled = false;
                     primaryPingRunning = true;
+
+                    Properties.Settings.Default.primaryTarget = primaryTarget_txt.Text;
+                    Properties.Settings.Default.primaryTargetEnabled = true;
+                    Properties.Settings.Default.Save();
                 }
             }
         }
@@ -118,25 +135,12 @@ namespace Project_PingMonitor
         }
 
 
-        private void primaryTarget_txt_TextChanged(object sender, EventArgs e)
-        {
-            if (primaryPingRunning == true)
-            {
-                primaryTimer.Stop();
-                primaryStatus_txt.Text = "Stopped";
-                primaryTargetToggle_btn.Text = "Start";
-                primaryPingRunning = false;
-                primaryReply_txt.Text = "";
-            }
-        }
-
-
         private void MainForm_Resize(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
                 notifyIcon.Visible = true;
-                notifyIcon.ShowBalloonTip(3000);
+                notifyIcon.ShowBalloonTip(500);
                 this.ShowInTaskbar = false;
             }
 
@@ -188,7 +192,7 @@ namespace Project_PingMonitor
 
         private void setReplyOutput(ref Label label, PingReply reply)
         {
-            label.Text += "Address: " + reply.Address.ToString() + "\r\n";
+            label.Text = "Address: " + reply.Address.ToString() + "\r\n";
             label.Text += "RoundTrip time: " + reply.RoundtripTime.ToString() + "\r\n";
             label.Text += "Time to live: " + reply.Options.Ttl.ToString() + "\r\n";
             label.Text += "Don't fragment: " + reply.Options.DontFragment.ToString() + "\r\n";

@@ -99,41 +99,5 @@ namespace Project_PingMonitor.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string primaryTargetEnabled {
-            get {
-                return ResourceManager.GetString("primaryTargetEnabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string primaryTargetIp {
-            get {
-                return ResourceManager.GetString("primaryTargetIp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 300.
-        /// </summary>
-        internal static string thresholdHigh {
-            get {
-                return ResourceManager.GetString("thresholdHigh", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 100.
-        /// </summary>
-        internal static string thresholdLow {
-            get {
-                return ResourceManager.GetString("thresholdLow", resourceCulture);
-            }
-        }
     }
 }

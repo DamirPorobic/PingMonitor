@@ -130,20 +130,4 @@
   <data name="PM_Yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PM_Yellow.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="primaryTargetEnabled" xml:space="preserve">
-    <value />
-    <comment>Is the primary target enabled on should it be pinged</comment>
-  </data>
-  <data name="primaryTargetIp" xml:space="preserve">
-    <value />
-    <comment>IP of the primary target that is pinged</comment>
-  </data>
-  <data name="thresholdHigh" xml:space="preserve">
-    <value>300</value>
-    <comment>Threshlod for the round trip delay. Below this threshold the connection is poor. Above this threshold the connection is bad.</comment>
-  </data>
-  <data name="thresholdLow" xml:space="preserve">
-    <value>100</value>
-    <comment>Threshlod for the round trip delay. Below this threshold the connection is good.</comment>
-  </data>
 </root>
