@@ -2,17 +2,29 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Project_PingMonitor.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="primaryTargetEnabled" Type="System.Boolean" Scope="User">
+    <Setting Name="primaryTargetEnabled" Description="Was the ping enabled for the primary target" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="primaryTarget" Type="System.String" Scope="User">
+    <Setting Name="primaryTarget" Description="Hostname or IP address of the primary target" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="thresholdLow" Type="System.Int32" Scope="User">
+    <Setting Name="thresholdLow" Description="Low threshold for response time" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
     </Setting>
-    <Setting Name="thresholdHigh" Type="System.Int32" Scope="User">
+    <Setting Name="thresholdHigh" Description="High threshold for response time" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="secondaryTargetEnabled" Description="Was the ping enabled for the secondary target" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="secondaryTarget" Description="Hostname or IP address of the secondary target" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ReachabilityCheckBestOfTwo" Description="What reachability check is used, if true, then best of two is used, otherwise worst of two." Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="pingInterval" Description="How often should the ping be sent. This value is entered in seconds." Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

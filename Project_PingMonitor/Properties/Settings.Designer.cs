@@ -23,7 +23,11 @@ namespace Project_PingMonitor.Properties {
             }
         }
         
+        /// <summary>
+        /// Was the ping enabled for the primary target
+        /// </summary>
         [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Was the ping enabled for the primary target")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool primaryTargetEnabled {
@@ -35,7 +39,11 @@ namespace Project_PingMonitor.Properties {
             }
         }
         
+        /// <summary>
+        /// Hostname or IP address of the primary target
+        /// </summary>
         [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Hostname or IP address of the primary target")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string primaryTarget {
@@ -47,7 +55,11 @@ namespace Project_PingMonitor.Properties {
             }
         }
         
+        /// <summary>
+        /// Low threshold for response time
+        /// </summary>
         [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Low threshold for response time")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public int thresholdLow {
@@ -59,7 +71,11 @@ namespace Project_PingMonitor.Properties {
             }
         }
         
+        /// <summary>
+        /// High threshold for response time
+        /// </summary>
         [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("High threshold for response time")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
         public int thresholdHigh {
@@ -68,6 +84,71 @@ namespace Project_PingMonitor.Properties {
             }
             set {
                 this["thresholdHigh"] = value;
+            }
+        }
+        
+        /// <summary>
+        /// Was the ping enabled for the secondary target
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Was the ping enabled for the secondary target")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool secondaryTargetEnabled {
+            get {
+                return ((bool)(this["secondaryTargetEnabled"]));
+            }
+            set {
+                this["secondaryTargetEnabled"] = value;
+            }
+        }
+        
+        /// <summary>
+        /// Hostname or IP address of the secondary target
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Hostname or IP address of the secondary target")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string secondaryTarget {
+            get {
+                return ((string)(this["secondaryTarget"]));
+            }
+            set {
+                this["secondaryTarget"] = value;
+            }
+        }
+        
+        /// <summary>
+        /// What reachability check is used, if true, then best of two is used, otherwise worst of two.
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("What reachability check is used, if true, then best of two is used, otherwise wor" +
+            "st of two.")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ReachabilityCheckBestOfTwo {
+            get {
+                return ((bool)(this["ReachabilityCheckBestOfTwo"]));
+            }
+            set {
+                this["ReachabilityCheckBestOfTwo"] = value;
+            }
+        }
+        
+        /// <summary>
+        /// How often should the ping be sent. This value is entered in seconds.
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("How often should the ping be sent. This value is entered in seconds.")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int pingInterval {
+            get {
+                return ((int)(this["pingInterval"]));
+            }
+            set {
+                this["pingInterval"] = value;
             }
         }
     }
